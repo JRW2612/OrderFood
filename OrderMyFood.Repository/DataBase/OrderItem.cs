@@ -16,5 +16,7 @@ namespace OrderMyFood.Repository.DataBase
 
         // Navigation property
         public virtual MenuItem MenuItem { get; set; }
+
+        public virtual Order order { get; set; }
     }
 }

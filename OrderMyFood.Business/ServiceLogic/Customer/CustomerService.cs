@@ -25,6 +25,7 @@ namespace OrderMyFood.Business.ServiceLogic.Customer
             return response;
         }
 
+
         public async Task<ResponseContext<int>> RegisterCustomerAsync(CustomerMasterModel customer)
         {
             var response = await _repository.RegisterCustomerAsync(customer);

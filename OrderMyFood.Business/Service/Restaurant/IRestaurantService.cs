@@ -10,11 +10,11 @@ using static OrderMyFood.DataModels.Helper.Helper;
 
 namespace OrderMyFood.Business.Service.Restaurant
 {
-    public interface IRestaurantService : IRestaurantRepository
+    public interface IRestaurantService 
     {
-        public Task<ResponseContext<MenuItemMasterModel>>GetRestaurantMenu(int restaurantId);    
+        Task<IEnumerable<MenuItemMasterModel>> GetRestaurantMenu(int restaurantId);    
 
-        public Task<ResponseContext<RestaurantMasterModel>> SearchRestaurants(string criteria);
+        Task<IEnumerable<RestaurantMasterModel>> SearchRestaurants(string criteria);
        
     }
 }

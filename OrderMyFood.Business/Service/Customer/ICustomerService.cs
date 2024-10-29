@@ -16,6 +16,7 @@ namespace OrderMyFood.Business.Service.Customer
         public Task<ResponseContext<int>> RegisterCustomerAsync(CustomerMasterModel customer);
         public Task<ResponseContext<bool>> UnregisterCustomerAsync(int customerId);
         public Task<ResponseContext<bool>> UpdateCustomerAsync(CustomerMasterModel customer);
-       
+  
+
     }
 }

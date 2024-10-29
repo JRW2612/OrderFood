@@ -10,9 +10,11 @@ namespace OrderMyFood.Business.Repositories.Customer
 {
     public interface ICustomerRepository
     {
-        public Task<ResponseContext<int>> RegisterCustomerAsync(CustomerMasterModel customer);
-        public Task<ResponseContext<bool>> UpdateCustomerAsync(CustomerMasterModel customer);
-        public Task<ResponseContext<bool>> UnregisterCustomerAsync(int customerId);
-        public Task<ResponseContext<CustomerMasterModel>> GetCustomerAsync(int customerId);
+         Task<ResponseContext<int>> RegisterCustomerAsync(CustomerMasterModel customer);
+         Task<ResponseContext<bool>> UpdateCustomerAsync(CustomerMasterModel customer);
+         Task<ResponseContext<bool>> UnregisterCustomerAsync(int customerId);
+         Task<ResponseContext<CustomerMasterModel>> GetCustomerAsync(int customerId);
+
+
     }
 }

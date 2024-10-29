@@ -10,12 +10,12 @@ using static OrderMyFood.DataModels.Helper.Helper;
 
 namespace OrderMyFood.Business.Service.Order
 {
-    public interface IOrderService : IOrderRepository
+    public interface IOrderService 
     {
-        public Task<ResponseContext<bool>> CancelOrderAsync(int orderId);
-        public Task<ResponseContext<OrderMasterModel>> GetOrderAsync(int orderId);
-        public Task<ResponseContext<int>> PlaceOrderAsync(OrderMasterModel order);
-        public Task<ResponseContext<bool>> UpdateOrderAsync(OrderMasterModel order);
+         Task<ResponseContext<bool>> CancelOrderAsync(int orderId);
+         Task<IEnumerable<OrderMasterModel>> GetOrderAsync(int orderId);
+         Task<ResponseContext<int>> PlaceOrderAsync(OrderItemMasterModel order);
+         Task<ResponseContext<bool>> UpdateOrderAsync(OrderItemMasterModel order);
        
     }
 }

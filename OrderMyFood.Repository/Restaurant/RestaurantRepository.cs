@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using OrderMyFood.Business.Repositories.Restaurant;
 using OrderMyFood.DataModels;
@@ -9,7 +10,10 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static Humanizer.On;
+using System.Xml.Linq;
 using static OrderMyFood.DataModels.Helper.Helper;
+
 namespace OrderMyFood.Repository.Restaurant
 {
     public class RestaurantRepository : IRestaurantRepository
@@ -21,11 +25,12 @@ namespace OrderMyFood.Repository.Restaurant
         }
         public async Task<ResponseContext<MenuItemMasterModel>> GetRestaurantMenu(int restaurantId)
         {
-            ResponseContext<MenuItemMasterModel> response = new ResponseContext<MenuItemMasterModel>();
+           var response = new ResponseContext<MenuItemMasterModel>();
 
             try
             {
-                var entity = await _context.menuitems.Select(x => new MenuItemMasterModel
+                var data = await _context.menuitems.Where(x => x.RestaurantId == restaurantId).
+                Select(x => new MenuItemMasterModel
                 {
                     Id = x.Id,                // Unique identifier for the menu item
                     RestaurantId = x.RestaurantId, // Foreign key to the Restaurant
@@ -37,7 +42,7 @@ namespace OrderMyFood.Repository.Restaurant
                     DietaryInfo = x.DietaryInfo // Dietary information (e.g., Vegan, Gluten-Free)
                 }).ToListAsync();
 
-                response.Items = entity;
+                response.Items = data;
                 response.StatusCode = StatusCodes.Status200OK;
                 return response;
             }
@@ -51,7 +56,34 @@ namespace OrderMyFood.Repository.Restaurant
 
         public async Task<ResponseContext<RestaurantMasterModel>> SearchRestaurants(string criteria)
         {
-            throw new NotImplementedException();
+            var response = new ResponseContext<RestaurantMasterModel>();
+
+            try
+            {
+                var entity = await _context.restaurants
+                    .Where(x => x.Name == criteria || x.Location == criteria || x.Cuisine == criteria)
+                    .Select(x => new RestaurantMasterModel
+                    {
+                        Id = x.Id,                   // Unique identifier for the restaurant
+                        Name = x.Name,               // Name of the restaurant
+                        Cuisine = x.Cuisine,         // Type of cuisine offered by the restaurant
+                        Location = x.Location,       // Location of the restaurant
+                        AverageRating = x.AverageRating, // Average rating of the restaurant
+                        PriceRange = x.PriceRange     // Price range for the restaurant
+                    }).ToListAsync();
+
+                response.Items = entity;
+                response.StatusCode = StatusCodes.Status200OK;
+                return response;
+            }
+            catch
+            {
+                response.Items = null;
+                response.StatusCode = StatusCodes.Status404NotFound;
+                return response;
+            }
         }
+
+     
     }
 }

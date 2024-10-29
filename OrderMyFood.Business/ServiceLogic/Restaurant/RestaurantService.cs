@@ -18,16 +18,16 @@ namespace OrderMyFood.Business.ServiceLogic.Restaurant
         {
             _repository = repository;
         }
-        public async Task<ResponseContext<MenuItemMasterModel>> GetRestaurantMenu(int restaurantId)
+        public async Task<IEnumerable<MenuItemMasterModel>> GetRestaurantMenu(int restaurantId)
         {
             var response = await _repository.GetRestaurantMenu(restaurantId);
-            return response;
+            return response.Items;
         }
 
-        public async Task<ResponseContext<RestaurantMasterModel>> SearchRestaurants(string criteria)
+        public async Task<IEnumerable<RestaurantMasterModel>> SearchRestaurants(string criteria)
         {
             var response = await _repository.SearchRestaurants(criteria);
-            return response;
+            return response.Items;
         }
     }
 }

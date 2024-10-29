@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrderMyFood.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,10 @@ namespace OrderMyFood.Repository.DataBase
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string SocialLoginProvider { get; set; }
+
+        public static implicit operator Customer(CustomerMasterModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

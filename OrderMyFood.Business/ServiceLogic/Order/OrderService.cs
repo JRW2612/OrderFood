@@ -18,19 +18,19 @@ namespace OrderMyFood.Business.ServiceLogic.Order
             return response;
         }
 
-        public async Task<ResponseContext<OrderMasterModel>> GetOrderAsync(int orderId)
+        public async Task<IEnumerable<OrderMasterModel>> GetOrderAsync(int orderId)
         {
             var response = await _repository.GetOrderAsync(orderId);
-            return response;
+            return response.Items;
         }
 
-        public async Task<ResponseContext<int>> PlaceOrderAsync(OrderMasterModel order)
+        public async Task<ResponseContext<int>> PlaceOrderAsync(OrderItemMasterModel order)
         {
             var response = await _repository.PlaceOrderAsync(order);
             return response;
         }
 
-        public async Task<ResponseContext<bool>> UpdateOrderAsync(OrderMasterModel order)
+        public async Task<ResponseContext<bool>> UpdateOrderAsync(OrderItemMasterModel order)
         {
             var response = await _repository.UpdateOrderAsync(order);
             return response;

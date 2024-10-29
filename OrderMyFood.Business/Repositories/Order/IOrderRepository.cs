@@ -10,8 +10,8 @@ namespace OrderMyFood.Business.Repositories.Order
 {
     public interface IOrderRepository
     {
-        public Task<ResponseContext<int>> PlaceOrderAsync(OrderMasterModel order);
-        public Task<ResponseContext<bool>> UpdateOrderAsync(OrderMasterModel order);
+        public Task<ResponseContext<int>> PlaceOrderAsync(OrderItemMasterModel order);
+        public Task<ResponseContext<bool>> UpdateOrderAsync(OrderItemMasterModel order);
         public Task<ResponseContext<bool>> CancelOrderAsync(int orderId);
         public Task<ResponseContext<OrderMasterModel>> GetOrderAsync(int orderId);
     }
